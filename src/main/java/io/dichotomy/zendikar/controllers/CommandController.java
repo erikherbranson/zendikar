@@ -1,7 +1,7 @@
 package io.dichotomy.zendikar.controllers;
 
 import io.dichotomy.zendikar.commands.*;
-import org.javacord.api.entity.channel.TextChannel;
+import org.javacord.api.event.message.MessageCreateEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +19,12 @@ public class CommandController {
 
     @Autowired
     private RssRemove rssRemove;
+
+    @Autowired
+    private RoleAdd roleAdd;
+
+    @Autowired
+    private RoleRemove roleRemove;
 
     public Ping getPing() {
 
@@ -60,11 +66,31 @@ public class CommandController {
         return rssRemove;
     }
 
-    public void initiateChannelCommand(TextChannel channel, String messageContent) {
+    public void setRoleAdd(RoleAdd roleAdd) {
+
+        this.roleAdd = roleAdd;
+    }
+
+    public RoleAdd getRoleAdd() {
+
+        return roleAdd;
+    }
+
+    public void setRoleRemove(RoleRemove roleRemove) {
+
+        this.roleRemove = roleRemove;
+    }
+
+    public RoleRemove getRoleRemove() {
+
+        return roleRemove;
+    }
+
+    public void initiateChannelCommand(MessageCreateEvent event, String messageContent) {
 
         Command command = getChannelCommand(getChannelCommandType(messageContent));
 
-        command.run(channel, getChannelCommandArgument(messageContent));
+        command.run(event, getChannelCommandArgument(messageContent));
 
     }
 
@@ -83,6 +109,14 @@ public class CommandController {
             case "!rss-remove":
 
                 return getRssRemove();
+
+            case "!role-add":
+
+                return getRoleAdd();
+
+            case "!role-remove":
+
+                return getRoleRemove();
 
             default:
 

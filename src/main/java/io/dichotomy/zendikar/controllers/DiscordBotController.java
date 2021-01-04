@@ -76,9 +76,11 @@ public class DiscordBotController {
 
         discordApi.addMessageCreateListener(event -> {
 
+            event.getMessageAuthor().asUser();
+
             if (event.getMessageContent().startsWith(prefix)) {
 
-                getCommandController().initiateChannelCommand(event.getChannel(), event.getMessageContent());
+                getCommandController().initiateChannelCommand(event, event.getMessageContent());
             }
 
         });

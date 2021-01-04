@@ -2,6 +2,7 @@ package io.dichotomy.zendikar.commands;
 
 import io.dichotomy.zendikar.repositories.FeedManager;
 import org.javacord.api.entity.channel.TextChannel;
+import org.javacord.api.event.message.MessageCreateEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +23,9 @@ public class RssAdd implements Command {
     }
 
     @Override
-    public void run(TextChannel channel, String argument) {
+    public void run(MessageCreateEvent event, String argument) {
+
+        TextChannel channel = event.getChannel();
 
         getFeedManager().createFeed(channel.getIdAsString(), argument);
 

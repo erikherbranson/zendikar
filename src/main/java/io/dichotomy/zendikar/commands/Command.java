@@ -1,8 +1,8 @@
 package io.dichotomy.zendikar.commands;
 
-import org.javacord.api.entity.channel.TextChannel;
+import org.javacord.api.event.message.MessageCreateEvent;
 
 public interface Command {
 
-    void run(TextChannel channel, String argument);
+    void run(MessageCreateEvent event, String argument);
 }
