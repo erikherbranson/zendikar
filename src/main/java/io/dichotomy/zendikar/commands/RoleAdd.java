@@ -17,11 +17,7 @@ public class RoleAdd implements Command {
 
         List<Role> roles = server.getRolesByNameIgnoreCase(argument);
 
-        System.out.println("roles");
-        System.out.println(roles);
-
         String userName = event.getMessageAuthor().getName();
-
 
         if (roles.isEmpty() || argument.equalsIgnoreCase("admin")) {
 
