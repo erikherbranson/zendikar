@@ -1,4 +1,4 @@
-package io.dichotomy.rssbot.entities;
+package io.dichotomy.zendikar.entities;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;

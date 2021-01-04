@@ -1,11 +1,11 @@
-package io.dichotomy.rssbot.jobs;
+package io.dichotomy.zendikar.jobs;
 
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
-import io.dichotomy.rssbot.entities.Feed;
-import io.dichotomy.rssbot.repositories.FeedManager;
+import io.dichotomy.zendikar.entities.Feed;
+import io.dichotomy.zendikar.repositories.FeedManager;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.MessageBuilder;

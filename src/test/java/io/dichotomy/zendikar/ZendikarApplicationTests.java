@@ -1,10 +1,10 @@
-package io.dichotomy.rssbot;
+package io.dichotomy.zendikar;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RssbotApplicationTests {
+class ZendikarApplicationTests {
 
 	@Test
 	void contextLoads() {

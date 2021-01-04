@@ -1,12 +1,12 @@
-package io.dichotomy.rssbot.commands;
+package io.dichotomy.zendikar.commands;
 
-import io.dichotomy.rssbot.repositories.FeedManager;
+import io.dichotomy.zendikar.repositories.FeedManager;
 import org.javacord.api.entity.channel.TextChannel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RssRemove implements Command{
+public class RssAdd implements Command {
 
     @Autowired
     FeedManager feedManager;
@@ -24,8 +24,12 @@ public class RssRemove implements Command{
     @Override
     public void run(TextChannel channel, String argument) {
 
-        getFeedManager().deleteFeedsWithUrl(channel.getIdAsString(), argument);
+        getFeedManager().createFeed(channel.getIdAsString(), argument);
 
-        channel.sendMessage("Feed removed");
+        // TODO:
+        //  - validate that the argument is a valid url
+        //  - manual run of feed output
+
+        channel.sendMessage("Feed added");
     }
 }

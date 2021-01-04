@@ -1,4 +1,4 @@
-package io.dichotomy.rssbot.commands;
+package io.dichotomy.zendikar.commands;
 
 import org.javacord.api.entity.channel.TextChannel;
 

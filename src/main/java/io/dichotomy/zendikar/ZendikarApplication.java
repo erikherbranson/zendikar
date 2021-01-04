@@ -1,14 +1,14 @@
-package io.dichotomy.rssbot;
+package io.dichotomy.zendikar;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RssbotApplication {
+public class ZendikarApplication {
 
 	public static void main(String[] args) {
 
-		SpringApplication.run(RssbotApplication.class, args);
+		SpringApplication.run(ZendikarApplication.class, args);
 	}
 
 }

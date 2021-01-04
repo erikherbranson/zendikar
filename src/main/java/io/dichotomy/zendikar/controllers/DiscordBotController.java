@@ -1,6 +1,6 @@
-package io.dichotomy.rssbot.controllers;
+package io.dichotomy.zendikar.controllers;
 
-import io.dichotomy.rssbot.entities.DiscordBot;
+import io.dichotomy.zendikar.entities.DiscordBot;
 import org.javacord.api.DiscordApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

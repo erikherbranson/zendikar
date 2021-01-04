@@ -1,4 +1,4 @@
-package io.dichotomy.rssbot.entities;
+package io.dichotomy.zendikar.entities;
 
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;

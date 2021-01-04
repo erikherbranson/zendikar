@@ -1,8 +1,8 @@
-package io.dichotomy.rssbot.controllers;
+package io.dichotomy.zendikar.controllers;
 
-import io.dichotomy.rssbot.entities.DiscordBot;
-import io.dichotomy.rssbot.jobs.UpdateRssFeeds;
-import io.dichotomy.rssbot.repositories.FeedManager;
+import io.dichotomy.zendikar.entities.DiscordBot;
+import io.dichotomy.zendikar.jobs.UpdateRssFeeds;
+import io.dichotomy.zendikar.repositories.FeedManager;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

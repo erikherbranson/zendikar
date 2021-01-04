@@ -1,6 +1,6 @@
-package io.dichotomy.rssbot.repositories;
+package io.dichotomy.zendikar.repositories;
 
-import io.dichotomy.rssbot.entities.Feed;
+import io.dichotomy.zendikar.entities.Feed;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

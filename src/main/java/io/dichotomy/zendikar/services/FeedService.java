@@ -1,7 +1,7 @@
-package io.dichotomy.rssbot.services;
+package io.dichotomy.zendikar.services;
 
-import io.dichotomy.rssbot.entities.Feed;
-import io.dichotomy.rssbot.repositories.FeedManager;
+import io.dichotomy.zendikar.entities.Feed;
+import io.dichotomy.zendikar.repositories.FeedManager;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

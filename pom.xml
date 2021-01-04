@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.dichotomy</groupId>
-	<artifactId>rssbot</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>zendikar</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>rssbot</name>
-	<description>RSS bot for Discord</description>
+	<name>Zendikar</name>
+	<description>Multipurpose Discord bot</description>
 
 	<properties>
 		<java.version>1.8</java.version>

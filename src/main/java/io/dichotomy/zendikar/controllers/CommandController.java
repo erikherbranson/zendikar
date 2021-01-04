@@ -1,6 +1,6 @@
-package io.dichotomy.rssbot.controllers;
+package io.dichotomy.zendikar.controllers;
 
-import io.dichotomy.rssbot.commands.*;
+import io.dichotomy.zendikar.commands.*;
 import org.javacord.api.entity.channel.TextChannel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
