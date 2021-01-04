@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RssAdd implements Command {
+public class RssRemove implements Command{
 
     @Autowired
     FeedManager feedManager;
@@ -24,12 +24,8 @@ public class RssAdd implements Command {
     @Override
     public void run(TextChannel channel, String argument) {
 
-        getFeedManager().createFeed(channel.getIdAsString(), argument);
+        getFeedManager().deleteFeedsWithUrl(channel.getIdAsString(), argument);
 
-        // TODO:
-        //  - validate that the argument is a valid url
-        //  - manual run of feed output
-
-        channel.sendMessage("Feed added");
+        channel.sendMessage("Feed removed");
     }
 }

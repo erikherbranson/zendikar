@@ -65,6 +65,18 @@ public class FeedManager {
         getFeedRepository().deleteById(objectId);
     }
 
+    public void deleteFeedsWithUrl(String channelId, String url) {
+
+        List<Feed> feedsFromInChannel = readFeeds(channelId);
+
+        feedsFromInChannel.forEach(feed -> {
+            if (feed.getUrl().equalsIgnoreCase(url)) {
+
+                deleteFeed(feed.get_id());
+            }
+        });
+    }
+
     private Long setBackOneMonth(Date date) {
 
         long ONE_MONTH = (long) 30 * 24 * 60 * 60 * 1000;

@@ -1,9 +1,6 @@
 package io.dichotomy.rssbot.controllers;
 
-import io.dichotomy.rssbot.commands.Command;
-import io.dichotomy.rssbot.commands.Ping;
-import io.dichotomy.rssbot.commands.RssAdd;
-import io.dichotomy.rssbot.commands.Unknown;
+import io.dichotomy.rssbot.commands.*;
 import org.javacord.api.entity.channel.TextChannel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,6 +16,9 @@ public class CommandController {
 
     @Autowired
     private RssAdd rssAdd;
+
+    @Autowired
+    private RssRemove rssRemove;
 
     public Ping getPing() {
 
@@ -50,6 +50,16 @@ public class CommandController {
         this.rssAdd = rssAdd;
     }
 
+    public void setRssRemove(RssRemove rssRemove) {
+
+        this.rssRemove = rssRemove;
+    }
+
+    public RssRemove getRssRemove() {
+
+        return rssRemove;
+    }
+
     public void initiateChannelCommand(TextChannel channel, String messageContent) {
 
         Command command = getChannelCommand(getChannelCommandType(messageContent));
@@ -71,6 +81,8 @@ public class CommandController {
                 return getRssAdd();
 
             case "!rss-remove":
+
+                return getRssRemove();
 
             default:
 
