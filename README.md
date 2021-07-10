@@ -1,6 +1,3 @@
-
-![zendikar hedrons](https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/d/da/Hedron-landscape.jpg/revision/latest/scale-to-width-down/620?cb=20190315182456)
-
 # Zendikar
 
 Discord bot that provides RSS updates from selected resources and utility functions
