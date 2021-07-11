@@ -1,6 +1,8 @@
 package io.dichotomy.zendikar.controllers;
 
 import io.dichotomy.zendikar.commands.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,83 +10,24 @@ import org.springframework.stereotype.Component;
 @Component
 public class CommandController {
 
-    @Autowired
+    @Autowired @Getter @Setter
     private Ping ping;
 
-    @Autowired
+    @Autowired @Getter @Setter
     private Unknown unknown;
 
-    @Autowired
+    @Autowired @Getter @Setter
     private RssAdd rssAdd;
 
-    @Autowired
+    @Autowired @Getter @Setter
     private RssRemove rssRemove;
 
-    @Autowired
+    @Autowired @Getter @Setter
     private RoleAdd roleAdd;
 
-    @Autowired
+    @Autowired @Getter @Setter
     private RoleRemove roleRemove;
 
-    public Ping getPing() {
-
-        return ping;
-    }
-
-    public void setPing(Ping ping) {
-
-        this.ping = ping;
-    }
-
-    public Unknown getUnknown() {
-
-        return unknown;
-    }
-
-    public void setUnknown(Unknown unknown) {
-
-        this.unknown = unknown;
-    }
-
-    public RssAdd getRssAdd() {
-
-        return rssAdd;
-    }
-
-    public void setRssAdd(RssAdd rssAdd) {
-
-        this.rssAdd = rssAdd;
-    }
-
-    public void setRssRemove(RssRemove rssRemove) {
-
-        this.rssRemove = rssRemove;
-    }
-
-    public RssRemove getRssRemove() {
-
-        return rssRemove;
-    }
-
-    public void setRoleAdd(RoleAdd roleAdd) {
-
-        this.roleAdd = roleAdd;
-    }
-
-    public RoleAdd getRoleAdd() {
-
-        return roleAdd;
-    }
-
-    public void setRoleRemove(RoleRemove roleRemove) {
-
-        this.roleRemove = roleRemove;
-    }
-
-    public RoleRemove getRoleRemove() {
-
-        return roleRemove;
-    }
 
     public void initiateChannelCommand(MessageCreateEvent event, String messageContent) {
 

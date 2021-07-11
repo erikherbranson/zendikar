@@ -1,5 +1,7 @@
 package io.dichotomy.zendikar.entities;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,7 +10,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class DiscordBot {
 
+    @Getter @Setter
     private DiscordApi discordApi;
+
+    @Getter @Setter
     private BotStatus botStatus = BotStatus.OFFLINE;
 
     @Value("${discord.api.token}")
@@ -16,26 +21,6 @@ public class DiscordBot {
 
     public enum BotStatus {
         RUNNING, OFFLINE
-    }
-
-    public void setDiscordApi(DiscordApi discordApi) {
-
-        this.discordApi = discordApi;
-    }
-
-    public DiscordApi getDiscordApi() {
-
-        return discordApi;
-    }
-
-    public void setBotStatus(BotStatus botStatus) {
-
-        this.botStatus = botStatus;
-    }
-
-    public BotStatus getBotStatus() {
-
-        return botStatus;
     }
 
     private String getToken() {

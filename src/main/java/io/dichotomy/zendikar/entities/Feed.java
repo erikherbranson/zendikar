@@ -1,14 +1,22 @@
 package io.dichotomy.zendikar.entities;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
 public class Feed {
 
-    @Id
+    @Id @Getter @Setter
     private ObjectId _id;
+
+    @Getter @Setter
     private String channelId;
+
+    @Getter @Setter
     private String url;
+
+    @Getter @Setter
     private Long lastUpdated;
 
     public Feed() {
@@ -19,46 +27,6 @@ public class Feed {
         this._id = _id;
         this.channelId = channelId;
         this.url = url;
-        this.lastUpdated = lastUpdated;
-    }
-
-    public ObjectId get_id() {
-
-        return _id;
-    }
-
-    public void set_id(ObjectId _id) {
-
-        this._id = _id;
-    }
-
-    public String getChannelId() {
-
-        return channelId;
-    }
-
-    public void setChannelId(String channelId) {
-
-        this.channelId = channelId;
-    }
-
-    public String getUrl() {
-
-        return url;
-    }
-
-    public void setUrl(String url) {
-
-        this.url = url;
-    }
-
-    public Long getLastUpdated() {
-
-        return lastUpdated;
-    }
-
-    public void setLastUpdated(Long lastUpdated) {
-
         this.lastUpdated = lastUpdated;
     }
 }

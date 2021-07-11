@@ -2,6 +2,8 @@ package io.dichotomy.zendikar.services;
 
 import io.dichotomy.zendikar.entities.Feed;
 import io.dichotomy.zendikar.repositories.FeedManager;
+import lombok.Getter;
+import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,17 +17,8 @@ import java.util.List;
 public class FeedService {
 
     @Autowired
+    @Getter @Setter
     FeedManager feedManager;
-
-    public void setFeedManager(FeedManager feedManager) {
-
-        this.feedManager = feedManager;
-    }
-
-    public FeedManager getFeedManager() {
-
-        return feedManager;
-    }
 
     @GetMapping("/feeds")
     @ResponseBody

@@ -1,6 +1,8 @@
 package io.dichotomy.zendikar.repositories;
 
 import io.dichotomy.zendikar.entities.Feed;
+import lombok.Getter;
+import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,18 +13,8 @@ import java.util.List;
 @Service
 public class FeedManager {
 
-    @Autowired
+    @Autowired @Getter @Setter
     FeedRepository feedRepository;
-
-    public void setFeedRepository(FeedRepository feedRepository) {
-
-        this.feedRepository = feedRepository;
-    }
-
-    public FeedRepository getFeedRepository() {
-
-        return feedRepository;
-    }
 
     public void createFeed(String channelId, String url) {
 

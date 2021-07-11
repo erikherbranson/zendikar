@@ -3,6 +3,8 @@ package io.dichotomy.zendikar.controllers;
 import io.dichotomy.zendikar.entities.DiscordBot;
 import io.dichotomy.zendikar.jobs.UpdateRssFeeds;
 import io.dichotomy.zendikar.repositories.FeedManager;
+import lombok.Getter;
+import lombok.Setter;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,34 +14,14 @@ import java.util.UUID;
 @Component
 public class ScheduleController {
 
-    @Autowired
-    Scheduler scheduler;
+    @Autowired @Getter @Setter
+    private Scheduler scheduler;
 
-    @Autowired
-    DiscordBot discordBot;
+    @Autowired @Getter @Setter
+    private DiscordBot discordBot;
 
-    @Autowired
-    FeedManager feedManager;
-
-    public void setDiscordBot(DiscordBot discordBot) {
-
-        this.discordBot = discordBot;
-    }
-
-    public DiscordBot getDiscordBot() {
-
-        return discordBot;
-    }
-
-    public void setFeedManager(FeedManager feedManager) {
-
-        this.feedManager = feedManager;
-    }
-
-    public FeedManager getFeedManager() {
-
-        return feedManager;
-    }
+    @Autowired @Getter @Setter
+    private FeedManager feedManager;
 
     public void dropJobs() {
 
