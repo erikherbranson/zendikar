@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class RoleRemove implements Command {
+public class RoleRemove implements MessageCommand {
 
     @Override
-    public void run(MessageCreateEvent event, String argument) {
+    public void process(MessageCreateEvent event, String argument) {
 
         Server server = event.getServer().get();
         TextChannel channel = event.getChannel();
@@ -23,7 +23,7 @@ public class RoleRemove implements Command {
 
         if (rolesToRemove.isEmpty()) {
 
-            channel.sendMessage("Cannot find role in server");
+            channel.sendMessage(String.format(":x: Cannot find role **_%s_** in server", argument));
 
             return;
         }
@@ -37,7 +37,9 @@ public class RoleRemove implements Command {
 
                 roleToRemove.removeUser(event.getMessageAuthor().asUser().get());
 
-                channel.sendMessage("Removed role :thumbsup:");
+                String message = String.format(":white_check_mark: Removed role **_%s_**", roleToRemove.getName());
+
+                channel.sendMessage(message);
 
                 return;
             }

@@ -4,10 +4,10 @@ import org.javacord.api.event.message.MessageCreateEvent;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Unknown implements Command {
+public class Unknown implements MessageCommand {
 
     @Override
-    public void run(MessageCreateEvent event, String argument) {
+    public void process(MessageCreateEvent event, String argument) {
 
         event.getChannel().sendMessage("That command is not supported");
     }

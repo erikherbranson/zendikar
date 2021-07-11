@@ -1,36 +1,63 @@
 package io.dichotomy.zendikar.commands;
 
+import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.permission.Role;
 import org.javacord.api.entity.server.Server;
+import org.javacord.api.entity.user.User;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class RoleAdd implements Command {
+public class RoleAdd implements MessageCommand {
 
     @Override
-    public void run(MessageCreateEvent event, String argument) {
+    public void process(MessageCreateEvent event, String argument) {
 
         Server server = event.getServer().get();
 
         List<Role> roles = server.getRolesByNameIgnoreCase(argument);
 
-        String userName = event.getMessageAuthor().getName();
+        User user = event.getMessageAuthor().asUser().get();
 
         if (roles.isEmpty() || argument.equalsIgnoreCase("admin")) {
 
-            event.getChannel().sendMessage(String.format("I cannot do that %s", userName));
+            errorResponse(user, argument, event.getChannel());
 
         } else {
 
             Role role = roles.get(0);
 
-            role.addUser(event.getMessageAuthor().asUser().get());
+            role.addUser(user);
 
-            event.getChannel().sendMessage(String.format("Added the role %s to user %s", role.getName(), userName ));
-
+            successResponse(user, role, event.getChannel());
         }
     }
+
+    private void errorResponse(User user, String argument, TextChannel channel) {
+
+        String errorMessage = String.format(":x: **%s** cannot be assigned role **_%s_** ", user.getName(), argument);
+
+        errorResponse(channel, errorMessage);
+
+    }
+
+    private void errorResponse(TextChannel channel, String message) {
+
+        channel.sendMessage(message);
+    }
+
+    private void successResponse(User user, Role role, TextChannel channel) {
+
+        String message = String.format(":white_check_mark: Assigned role **_%s_** to **%s**", role.getName(), user.getName());
+
+        successResponse(channel, message);
+    }
+
+    private void successResponse(TextChannel channel, String message) {
+
+        channel.sendMessage(message);
+    }
+
 }

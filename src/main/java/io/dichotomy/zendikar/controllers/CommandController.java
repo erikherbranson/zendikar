@@ -31,13 +31,13 @@ public class CommandController {
 
     public void initiateChannelCommand(MessageCreateEvent event, String messageContent) {
 
-        Command command = getChannelCommand(getChannelCommandType(messageContent));
+        MessageCommand messageCommand = getChannelCommand(getChannelCommandType(messageContent));
 
-        command.run(event, getChannelCommandArgument(messageContent));
+        messageCommand.process(event, getChannelCommandArgument(messageContent));
 
     }
 
-    private Command getChannelCommand(String command) {
+    private MessageCommand getChannelCommand(String command) {
 
         switch (command) {
 

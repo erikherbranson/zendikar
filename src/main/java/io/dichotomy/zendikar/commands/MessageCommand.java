@@ -2,7 +2,7 @@ package io.dichotomy.zendikar.commands;
 
 import org.javacord.api.event.message.MessageCreateEvent;
 
-public interface Command {
+public interface MessageCommand {
 
-    void run(MessageCreateEvent event, String argument);
+    void process(MessageCreateEvent event, String argument);
 }

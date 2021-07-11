@@ -85,8 +85,13 @@ public class ScheduleController {
                 .withIdentity(jobDetail.getKey().getName(), group)
                 .withDescription(description)
                 .startNow()
-                .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(20).repeatForever())
+                .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(1).repeatForever())
                 .build();
+    }
+
+    private void createManualRun() {
+
+
     }
 
 }

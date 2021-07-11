@@ -54,7 +54,6 @@ public class DiscordBotController {
 
                 getCommandController().initiateChannelCommand(event, event.getMessageContent());
             }
-
         });
     }
 

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class BotService {
 
-
     @Autowired @Getter @Setter
     DiscordBotController discordBotController;
 

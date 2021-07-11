@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RssRemove implements Command{
+public class RssRemove implements MessageCommand {
 
     @Autowired
     FeedManager feedManager;
@@ -23,7 +23,7 @@ public class RssRemove implements Command{
     }
 
     @Override
-    public void run(MessageCreateEvent event, String argument) {
+    public void process(MessageCreateEvent event, String argument) {
 
         TextChannel channel = event.getChannel();
 
