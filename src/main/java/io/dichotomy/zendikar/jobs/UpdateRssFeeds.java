@@ -1,5 +1,6 @@
 package io.dichotomy.zendikar.jobs;
 
+import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
@@ -73,7 +74,11 @@ public class UpdateRssFeeds implements Job {
 
     private void sendRssContentToChannel(TextChannel channel, Long lastUpdated, SyndFeed syndFeed) {
 
-        syndFeed.getEntries().forEach(syndEntry -> {
+        List<SyndEntry> entries = syndFeed.getEntries();
+
+        for (int i = entries.size() - 1; i >= 0; i--) {
+
+            SyndEntry syndEntry = entries.get(i);
 
             long feedTimestamp = 0L;
 
@@ -89,7 +94,8 @@ public class UpdateRssFeeds implements Job {
 
                 channel.sendMessage(syndEntry.getLink().startsWith("http") ? syndEntry.getLink() : "https:" + syndEntry.getLink());
             }
-        });
+        }
+
     }
 
 }
