@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="./resources/logo.png" alt="logo" height="220" />
+</p>
+
 # Zendikar
 
 Discord bot that provides RSS updates from selected resources and utility functions
