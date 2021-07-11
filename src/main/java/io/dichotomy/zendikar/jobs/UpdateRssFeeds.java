@@ -1,6 +1,5 @@
 package io.dichotomy.zendikar.jobs;
 
-import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
@@ -9,8 +8,6 @@ import io.dichotomy.zendikar.entities.Feed;
 import io.dichotomy.zendikar.repositories.FeedManager;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
-import org.javacord.api.entity.message.MessageBuilder;
-import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
@@ -26,6 +23,8 @@ public class UpdateRssFeeds implements Job {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) {
+
+        System.out.println("UpdateRssFeeds job started");
 
         JobDataMap jobDataMap = jobExecutionContext.getMergedJobDataMap();
 
@@ -88,20 +87,9 @@ public class UpdateRssFeeds implements Job {
 
             if (lastUpdated < feedTimestamp) {
 
-                buildMessage(syndEntry).send(channel);
+                channel.sendMessage(syndEntry.getLink().startsWith("http") ? syndEntry.getLink() : "https:" + syndEntry.getLink());
             }
         });
-    }
-
-    private MessageBuilder buildMessage(SyndEntry syndEntry) {
-
-        return new MessageBuilder()
-            .setEmbed(
-                new EmbedBuilder()
-                    .setAuthor(syndEntry.getAuthor())
-                    .setTitle(syndEntry.getTitle())
-                    .setDescription(syndEntry.getLink().startsWith("https:") ? syndEntry.getLink() : "https:" + syndEntry.getLink())
-            );
     }
 
 }

@@ -23,7 +23,7 @@ public class FeedManager {
         feed.set_id(ObjectId.get());
         feed.setChannelId(channelId);
         feed.setUrl(url);
-        feed.setLastUpdated(setBackOneMonth(new Date()));
+        feed.setLastUpdated(setBackThreeMonths(new Date()));
 
         getFeedRepository().save(feed);
     }
@@ -69,10 +69,10 @@ public class FeedManager {
         });
     }
 
-    private Long setBackOneMonth(Date date) {
+    private Long setBackThreeMonths(Date date) {
 
         long ONE_MONTH = (long) 30 * 24 * 60 * 60 * 1000;
 
-        return date.getTime() - ONE_MONTH;
+        return date.getTime() - (ONE_MONTH * 3);
     }
 }

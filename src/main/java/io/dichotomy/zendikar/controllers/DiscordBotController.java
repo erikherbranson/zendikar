@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DiscordBotController {
 
-    private final String prefix = "!";
+    private final String prefix = "/";
 
     @Autowired @Getter @Setter
     private DiscordBot discordBot;
@@ -47,8 +47,6 @@ public class DiscordBotController {
     private void registerMessageListener(DiscordApi discordApi) {
 
         discordApi.addMessageCreateListener(event -> {
-
-            event.getMessageAuthor().asUser();
 
             if (event.getMessageContent().startsWith(prefix)) {
 

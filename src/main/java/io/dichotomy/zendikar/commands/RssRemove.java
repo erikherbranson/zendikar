@@ -2,6 +2,8 @@ package io.dichotomy.zendikar.commands;
 
 import io.dichotomy.zendikar.repositories.FeedManager;
 import org.javacord.api.entity.channel.TextChannel;
+import org.javacord.api.entity.server.Server;
+import org.javacord.api.entity.user.User;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -30,5 +32,12 @@ public class RssRemove implements MessageCommand {
         getFeedManager().deleteFeedsWithUrl(channel.getIdAsString(), argument);
 
         channel.sendMessage("Feed removed");
+    }
+
+    @Override
+    public Boolean validateUser(User user, Server server) {
+
+        return server.isAdmin(user);
+
     }
 }

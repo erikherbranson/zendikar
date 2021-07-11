@@ -41,7 +41,7 @@ public class ScheduleController {
 
         try {
 
-            System.out.println("Starting jobs");
+            System.out.println("Scheduling jobs");
 
             scheduleRssFeedUpdate();
 
@@ -64,7 +64,7 @@ public class ScheduleController {
 
         scheduler.scheduleJob(jobDetail, trigger);
 
-        System.out.println("UpdateRssFeeds job started");
+        System.out.println("scheduled RssFeedUpdate job");
 
     }
 
@@ -85,7 +85,7 @@ public class ScheduleController {
                 .withIdentity(jobDetail.getKey().getName(), group)
                 .withDescription(description)
                 .startNow()
-                .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(1).repeatForever())
+                .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(20).repeatForever())
                 .build();
     }
 
