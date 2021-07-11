@@ -1,22 +1,19 @@
 package io.dichotomy.zendikar.jobs;
 
-import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
+import com.rometools.rome.io.XmlReader;
 import io.dichotomy.zendikar.entities.Feed;
 import io.dichotomy.zendikar.repositories.FeedManager;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
-import org.javacord.api.entity.message.MessageBuilder;
-import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +23,8 @@ public class UpdateRssFeeds implements Job {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) {
+
+        System.out.println("UpdateRssFeeds job started");
 
         JobDataMap jobDataMap = jobExecutionContext.getMergedJobDataMap();
 
@@ -69,28 +68,28 @@ public class UpdateRssFeeds implements Job {
 
         SyndFeedInput input = new SyndFeedInput();
 
-        return input.build(new InputStreamReader(response));
+        return input.build(new XmlReader(response));
     }
 
     private void sendRssContentToChannel(TextChannel channel, Long lastUpdated, SyndFeed syndFeed) {
 
         syndFeed.getEntries().forEach(syndEntry -> {
-            if (lastUpdated < syndEntry.getPublishedDate().getTime()) {
 
-                buildMessage(syndEntry).send(channel);
+            long feedTimestamp = 0L;
+
+            if (syndEntry.getPublishedDate() != null) {
+                feedTimestamp = syndEntry.getPublishedDate().getTime();
+            }
+
+            if (syndEntry.getUpdatedDate() != null) {
+                feedTimestamp = syndEntry.getUpdatedDate().getTime();
+            }
+
+            if (lastUpdated < feedTimestamp) {
+
+                channel.sendMessage(syndEntry.getLink().startsWith("http") ? syndEntry.getLink() : "https:" + syndEntry.getLink());
             }
         });
-    }
-
-    private MessageBuilder buildMessage(SyndEntry syndEntry) {
-
-        return new MessageBuilder()
-            .setEmbed(
-                new EmbedBuilder()
-                    .setAuthor(syndEntry.getAuthor())
-                    .setTitle(syndEntry.getTitle())
-                    .setDescription(syndEntry.getLink().startsWith("https:") ? syndEntry.getLink() : "https:" + syndEntry.getLink())
-            );
     }
 
 }

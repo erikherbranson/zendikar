@@ -9,23 +9,25 @@ to help manage active guilds.
 
 ### Main features
 
-This bot sets up subscription channels in your server. An overview channel
-that list the available channels the members can subscribe to. You react
-with either checkmark (to subscribe) or x (to unsubscribe) to the message
-labelling the subscription topic of choice.
+>RSS - lets users give themselves a role which allows them to see certain
+channels that are receiving active RSS feeds. They subscribe to topics.
 
-This bot lets members add and remove roles themselves.
+>Channel Purge - [ _future feature_ ] Lets admins quickly delete old messages.
 
-[Future feature] Admin control panel to manage list of rss resources, view error logs,
-and perform helath checks
 
-### Member Commands
+### Commands
 
-- `!ping` : check to see if bot is up
-- `!role-add <role>` : grants you the provided role
-- `!role-remove <role>` : revoke this role
-- `!rss-add <url>` : add this url source as an RSS resource
-- `!rss-remove <url>` : remove this url from the RSS resouces
+@everyone
+- `/zendikar` : shows available commands and repo information
+- `/ping` : check to see if bot is up
+- `/rss` : lists the rss actions
+- `/rss --list` : lists available rss channels
+- `/rss --sub <channelName>` : subscribes you to the provided rss channel name
+- `/rss --rm <channelName>` : un-subscribes you from the provided rss channel name
+
+@admin
+- `/rss-add <url>` : add this url source as an RSS resource
+- `/rss-remove <url>` : remove this url from the RSS resouces
 
 ### Contributors
 

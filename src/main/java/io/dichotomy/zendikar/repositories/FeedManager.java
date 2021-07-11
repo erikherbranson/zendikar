@@ -1,6 +1,8 @@
 package io.dichotomy.zendikar.repositories;
 
 import io.dichotomy.zendikar.entities.Feed;
+import lombok.Getter;
+import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,18 +13,8 @@ import java.util.List;
 @Service
 public class FeedManager {
 
-    @Autowired
+    @Autowired @Getter @Setter
     FeedRepository feedRepository;
-
-    public void setFeedRepository(FeedRepository feedRepository) {
-
-        this.feedRepository = feedRepository;
-    }
-
-    public FeedRepository getFeedRepository() {
-
-        return feedRepository;
-    }
 
     public void createFeed(String channelId, String url) {
 
@@ -31,7 +23,7 @@ public class FeedManager {
         feed.set_id(ObjectId.get());
         feed.setChannelId(channelId);
         feed.setUrl(url);
-        feed.setLastUpdated(setBackOneMonth(new Date()));
+        feed.setLastUpdated(setBackThreeMonths(new Date()));
 
         getFeedRepository().save(feed);
     }
@@ -77,10 +69,10 @@ public class FeedManager {
         });
     }
 
-    private Long setBackOneMonth(Date date) {
+    private Long setBackThreeMonths(Date date) {
 
         long ONE_MONTH = (long) 30 * 24 * 60 * 60 * 1000;
 
-        return date.getTime() - ONE_MONTH;
+        return date.getTime() - (ONE_MONTH * 3);
     }
 }

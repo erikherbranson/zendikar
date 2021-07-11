@@ -1,6 +1,8 @@
 package io.dichotomy.zendikar.controllers;
 
 import io.dichotomy.zendikar.commands.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,119 +10,62 @@ import org.springframework.stereotype.Component;
 @Component
 public class CommandController {
 
-    @Autowired
+    @Autowired @Getter @Setter
     private Ping ping;
 
-    @Autowired
-    private Unknown unknown;
-
-    @Autowired
+    @Autowired @Getter @Setter
     private RssAdd rssAdd;
 
-    @Autowired
+    @Autowired @Getter @Setter
     private RssRemove rssRemove;
 
-    @Autowired
-    private RoleAdd roleAdd;
+    @Autowired @Getter @Setter
+    private Rss rss;
 
-    @Autowired
-    private RoleRemove roleRemove;
-
-    public Ping getPing() {
-
-        return ping;
-    }
-
-    public void setPing(Ping ping) {
-
-        this.ping = ping;
-    }
-
-    public Unknown getUnknown() {
-
-        return unknown;
-    }
-
-    public void setUnknown(Unknown unknown) {
-
-        this.unknown = unknown;
-    }
-
-    public RssAdd getRssAdd() {
-
-        return rssAdd;
-    }
-
-    public void setRssAdd(RssAdd rssAdd) {
-
-        this.rssAdd = rssAdd;
-    }
-
-    public void setRssRemove(RssRemove rssRemove) {
-
-        this.rssRemove = rssRemove;
-    }
-
-    public RssRemove getRssRemove() {
-
-        return rssRemove;
-    }
-
-    public void setRoleAdd(RoleAdd roleAdd) {
-
-        this.roleAdd = roleAdd;
-    }
-
-    public RoleAdd getRoleAdd() {
-
-        return roleAdd;
-    }
-
-    public void setRoleRemove(RoleRemove roleRemove) {
-
-        this.roleRemove = roleRemove;
-    }
-
-    public RoleRemove getRoleRemove() {
-
-        return roleRemove;
-    }
+    @Autowired @Getter @Setter
+    private BotInfo botInfo;
 
     public void initiateChannelCommand(MessageCreateEvent event, String messageContent) {
 
-        Command command = getChannelCommand(getChannelCommandType(messageContent));
+        MessageCommand messageCommand = getChannelCommand(getChannelCommandType(messageContent));
 
-        command.run(event, getChannelCommandArgument(messageContent));
+        if (messageCommand == null) {
+            //quit, not a recognized command
+            return;
+        }
 
+        if (messageCommand.validateUser(event.getMessageAuthor().asUser().get(), event.getServer().get())) {
+
+            messageCommand.process(event, getChannelCommandArgument(messageContent));
+
+        } else {
+
+            event.getChannel().sendMessage("Not authorized");
+            event.getChannel().sendMessage("http://gph.is/1Vo35Zc");
+        }
     }
 
-    private Command getChannelCommand(String command) {
+    private MessageCommand getChannelCommand(String command) {
 
         switch (command) {
 
-            case "!ping":
+            case "/zendikar":
+                return getBotInfo();
 
+            case "/ping":
                 return getPing();
 
-            case "!rss-add":
+            case "/rss":
+                return getRss();
 
+            case "/rss-add":
                 return getRssAdd();
 
-            case "!rss-remove":
-
+            case "/rss-remove":
                 return getRssRemove();
 
-            case "!role-add":
-
-                return getRoleAdd();
-
-            case "!role-remove":
-
-                return getRoleRemove();
-
             default:
-
-                return getUnknown();
+                return null;
         }
     }
 
@@ -144,7 +89,26 @@ public class CommandController {
 
         try {
 
-            return messageContent.trim().split(" ")[1];
+            String[] temp = messageContent.trim().split(" ");
+            StringBuilder sb = new StringBuilder();
+
+            int length = temp.length;
+            int lastIndex = length - 1;
+
+            for (int i = 0; i < length; i++) {
+
+                if (i == 0) {
+                    continue;
+                }
+
+                sb.append(temp[i]);
+
+                 if (i != lastIndex) {
+                     sb.append(" ");
+                 }
+            }
+
+            return sb.toString();
 
         } catch (Exception e) {
 

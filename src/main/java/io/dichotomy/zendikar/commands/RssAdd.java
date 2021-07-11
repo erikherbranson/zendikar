@@ -1,29 +1,23 @@
 package io.dichotomy.zendikar.commands;
 
 import io.dichotomy.zendikar.repositories.FeedManager;
+import lombok.Getter;
+import lombok.Setter;
 import org.javacord.api.entity.channel.TextChannel;
+import org.javacord.api.entity.server.Server;
+import org.javacord.api.entity.user.User;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RssAdd implements Command {
+public class RssAdd implements MessageCommand {
 
-    @Autowired
+    @Autowired @Getter @Setter
     FeedManager feedManager;
 
-    public void setFeedManager(FeedManager feedManager) {
-
-        this.feedManager = feedManager;
-    }
-
-    public FeedManager getFeedManager() {
-
-        return feedManager;
-    }
-
     @Override
-    public void run(MessageCreateEvent event, String argument) {
+    public void process(MessageCreateEvent event, String argument) {
 
         TextChannel channel = event.getChannel();
 
@@ -34,5 +28,12 @@ public class RssAdd implements Command {
         //  - manual run of feed output
 
         channel.sendMessage("Feed added");
+    }
+
+    @Override
+    public Boolean validateUser(User user, Server server) {
+
+        return server.isAdmin(user);
+
     }
 }

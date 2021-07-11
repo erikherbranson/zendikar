@@ -1,6 +1,8 @@
 package io.dichotomy.zendikar.controllers;
 
 import io.dichotomy.zendikar.entities.DiscordBot;
+import lombok.Getter;
+import lombok.Setter;
 import org.javacord.api.DiscordApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,46 +10,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class DiscordBotController {
 
-    private final String prefix = "!";
+    private final String prefix = "/";
 
-    @Autowired
-    DiscordBot discordBot;
+    @Autowired @Getter @Setter
+    private DiscordBot discordBot;
 
-    @Autowired
-    CommandController commandController;
+    @Autowired @Getter @Setter
+    private CommandController commandController;
 
-    @Autowired
-    ScheduleController scheduleController;
-
-    public void setDiscordBot(DiscordBot discordBot) {
-
-        this.discordBot = discordBot;
-    }
-
-    public DiscordBot getDiscordBot() {
-
-        return discordBot;
-    }
-
-    public void setCommandController(CommandController commandController) {
-
-        this.commandController = commandController;
-    }
-
-    public CommandController getCommandController() {
-
-        return commandController;
-    }
-
-    public void setScheduleController(ScheduleController scheduleController) {
-
-        this.scheduleController = scheduleController;
-    }
-
-    public ScheduleController getScheduleController() {
-
-        return scheduleController;
-    }
+    @Autowired @Getter @Setter
+    private ScheduleController scheduleController;
 
     public void initializeBot() {
 
@@ -76,13 +48,10 @@ public class DiscordBotController {
 
         discordApi.addMessageCreateListener(event -> {
 
-            event.getMessageAuthor().asUser();
-
             if (event.getMessageContent().startsWith(prefix)) {
 
                 getCommandController().initiateChannelCommand(event, event.getMessageContent());
             }
-
         });
     }
 
